@@ -1,6 +1,6 @@
 ## Tasks:
 [] make main page </br>
-  &nbsp; [] make header </br>
+  &nbsp; [🔜] make header </br>
   &nbsp; [] make content list </br>
   &nbsp; [] make content item </br>
   &nbsp; [] make changeble theme </br>
