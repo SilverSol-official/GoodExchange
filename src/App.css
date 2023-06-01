@@ -32,7 +32,17 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+header {
+  border: 2px solid black;
+  width: 100%;
+  background-color: #ECF013;
+  margin: auto;
+
+
 }
