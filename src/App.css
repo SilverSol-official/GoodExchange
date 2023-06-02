@@ -1,6 +1,6 @@
-.App {
+/* .App {
   text-align: center;
-}
+} */
 
 .App-logo {
   height: 40vmin;
@@ -38,11 +38,39 @@
   }
 }
 
+/* header styles */
 header {
-  border: 2px solid black;
   width: 100%;
   background-color: #ECF013;
   margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
+.logoWrapper {
+  display: flex;
+  flex-direction: row;
+  margin-right: auto;
+  justify-content: space-around;
+  width: 45%;
+  align-items: center;
+}
 
+.logo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.searchWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.logoWrapper>div>p:hover {
+  text-decoration: underline;
 }

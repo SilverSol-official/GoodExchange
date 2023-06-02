@@ -1,5 +1,5 @@
 import react from "react";
-import Header from "./Shared/Header";
+import Header from "../Shared/Header";
 
 const MainPage = () => {
   return (
