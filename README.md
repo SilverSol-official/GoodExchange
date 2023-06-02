@@ -4,7 +4,7 @@
   &nbsp; [] make content list </br>
   &nbsp; [] make content item </br>
   &nbsp; [] make changeble theme </br>
-[] make page of curency </br>
+[] make page of curency. </br>
   &nbsp; [] make main card </br>
   &nbsp; [] make graphic script </br>
 [] integrate rdx </br>
