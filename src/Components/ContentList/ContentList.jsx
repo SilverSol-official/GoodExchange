@@ -2,13 +2,14 @@ import React from "react";
 import { testData } from "./ContentTestData";
 import TempItem from "./tempItem";
 import SelectComponent from "../MainPageSelect/MainPageSelect";
+import ContentItem from "../ContentItem/ContentItem";
 
 const ContentList = () => {
   const headerLabels = {
-    nameF: "Повна назва",
-    code: "Код цифровий",
+    nameF: "Офіційний курс",
+    code: "Повна назва",
     nameS: "Код літерний",
-    course: "Офіційний курс ",
+    course: " ",
     symbol: "Символ",
   };
   return (
@@ -16,7 +17,7 @@ const ContentList = () => {
       <SelectComponent />
       <TempItem props={headerLabels} />
       {testData.map((item) => {
-        return <TempItem key={item.id} props={item} />;
+        return <ContentItem key={item.id} props={item} />;
       })}
     </div>
   );
