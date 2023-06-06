@@ -5,7 +5,6 @@ import ContentList from "../ContentList/ContentList";
 const MainPage = () => {
   return (
     <>
-      <Header />
       <ContentList />
     </>
   );

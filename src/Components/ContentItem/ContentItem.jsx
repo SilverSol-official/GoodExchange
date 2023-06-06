@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import StarIcon from "@mui/icons-material/Star";
-
+import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
 const ContentItem = ({ props }) => {
   // const name = "Currency Name";
   // const fullName = "Full Currency Name";
@@ -35,7 +36,9 @@ const ContentItem = ({ props }) => {
             <StarIcon style={{ fill: "gray" }} />
           )}
         </button>
-        <button onClick={handleSeeMore}>See More</button>
+        <Link to={`/${nameS}`} className="seeMoreButton">
+          <button type="button">See More</button>
+        </Link>
       </div>
     </div>
     // </div>
