@@ -5,6 +5,8 @@ import InputBase from "@mui/material/InputBase";
 import { Button } from "@mui/material";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
+import { useDispatch, useSelector } from "react-redux";
+import { changeTheme } from "../../rdx/features/Theme/theme";
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
@@ -49,6 +51,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Header = () => {
+  let darkTheme = useSelector((state) => state.theme.darkTheme);
+  const dispatch = useDispatch();
+
   return (
     <header>
       <div className="logoWrapper">
@@ -68,12 +73,13 @@ const Header = () => {
       </div>
       <div className="searchWrapper">
         <div className="theme">
-          <Button
-          // variant={darkTheme ? "dark" : "light"}
-          // onClick={() => dispatch(changeTheme())}
+          <button
+            type="button"
+            className={`btn ${darkTheme ? "btn-light" : "btn-outline-dark"}`}
+            onClick={() => dispatch(changeTheme())}
           >
             <LightModeIcon sx={{ color: "black" }} />
-          </Button>
+          </button>
         </div>
         <Search>
           <SearchIconWrapper>

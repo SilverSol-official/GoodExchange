@@ -38,10 +38,18 @@
   }
 }
 
+/* global classes   */
+
+.dark {
+  background-color: #282c34;
+  color: white;
+}
+
 /* header styles */
 header {
   width: 100%;
   background-color: #ECF013;
+  height: 90px;
   margin: auto;
   display: flex;
   justify-content: space-between;
@@ -80,7 +88,7 @@ header {
 
 .contentList {
   margin: auto;
-  margin-top: 30px;
+  padding-top: 30px;
   width: 70%;
   /* border: solid 2px black; */
 }

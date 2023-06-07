@@ -14,7 +14,7 @@ const SelectComponent = () => {
 
   return (
     <Box sx={{ width: "30%" }}>
-      <FormControl fullWidth>
+      <FormControl fullWidth variant="filled">
         <InputLabel id="demo-simple-select-label">Show ...</InputLabel>
         <Select
           labelId="demo-simple-select-label"
