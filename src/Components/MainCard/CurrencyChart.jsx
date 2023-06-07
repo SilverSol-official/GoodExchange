@@ -1,47 +1,40 @@
-import React from 'react';
-import { Line } from 'react-chartjs-2';
-import Chart from 'chart.js/auto';
+import React, { useEffect, useRef, useState } from "react";
+import { Line } from "react-chartjs-2";
+import Chart from "chart.js/auto";
 
-class CurrencyChart extends React.Component {
-  chartRef = React.createRef();
-  chartInstance = null;
+const CurrencyChart = () => {
+  const chartRef = useRef();
+  let chartInstance = null;
 
-  state = {
-    startDate: '',
-    endDate: '',
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+
+  useEffect(() => {
+    renderChart();
+  }, [startDate, endDate]);
+
+  const handleStartDateChange = (event) => {
+    setStartDate(event.target.value);
   };
 
-  componentDidMount() {
-    this.renderChart();
-  }
-
-  componentDidUpdate() {
-    this.renderChart();
-  }
-
-  handleStartDateChange = (event) => {
-    this.setState({ startDate: event.target.value });
+  const handleEndDateChange = (event) => {
+    setEndDate(event.target.value);
   };
 
-  handleEndDateChange = (event) => {
-    this.setState({ endDate: event.target.value });
-  };
-
-  renderChart() {
-    const { startDate, endDate } = this.state;
-
-    // Code to fetch data for the selected date range
-    // ...
+  const renderChart = () => {
+    // TODO: Code to fetch data for the selected date range
+    // You need to fetch data based on the selected start and end dates
+    // and update the data variable below.
 
     // Example data for demonstration purposes
     const data = {
-      labels: ['Січ', 'Лют', 'Бер', 'Квіт', 'Трав', 'Черв'],
+      labels: ["Січ", "Лют", "Бер", "Квіт", "Трав", "Черв"],
       datasets: [
         {
-          label: 'Курс валюти',
+          label: "Курс валюти",
           data: [1.2, 1.3, 1.1, 1.4, 1.2, 1.5],
           fill: false,
-          borderColor: 'blue',
+          borderColor: "blue",
         },
       ],
     };
@@ -50,39 +43,37 @@ class CurrencyChart extends React.Component {
       responsive: true,
     };
 
-    if (this.chartInstance) {
-      this.chartInstance.destroy();
+    if (chartInstance) {
+      chartInstance.destroy();
     }
 
-    this.chartInstance = new Chart(this.chartRef.current, {
-      type: 'line',
+    chartInstance = new Chart(chartRef.current, {
+      type: "line",
       data: data,
       options: options,
     });
-  }
+  };
 
-  render() {
-    return (
-      <div className='CurrencyChart'>
-    
-            <canvas ref={this.chartRef} />
-            <div className='CurrencyChart__Select'>
-            <div> Оберіть початкову дату : <select value={this.state.startDate} onChange={this.handleStartDateChange}>
-          <option value="">Зробіть вибір</option>
-          {/* Options for start date */}
-                </select>
-                </div>
-                <br />
-                <div> Оберіть кінцеву дату : 
-        <select value={this.state.endDate} onChange={this.handleEndDateChange}>
-          <option value="">Зробіть вибір</option>
-          {/* Options for end date */}
-                    </select>
-                    </div>
-                </div>
+  return (
+    <div className="CurrencyChart">
+      <div className="CurrencyChart__Select">
+        <div>
+          Оберіть початкову дату:
+          <input
+            type="date"
+            value={startDate}
+            onChange={handleStartDateChange}
+          />
+        </div>
+        <br />
+        <div>
+          Оберіть кінцеву дату:
+          <input type="date" value={endDate} onChange={handleEndDateChange} />
+        </div>
       </div>
-    );
-  }
-}
+      <canvas ref={chartRef} />
+    </div>
+  );
+};
 
 export default CurrencyChart;

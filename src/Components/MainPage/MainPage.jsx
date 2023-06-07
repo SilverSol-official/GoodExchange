@@ -7,9 +7,11 @@ import { fetchAllCurrencies } from "../../rdx/features/Currencies/currencies";
 const MainPage = () => {
   let darkTheme = useSelector((state) => state.theme.darkTheme);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchAllCurrencies());
   }, [dispatch]);
+
   return (
     <div className={darkTheme ? "dark" : "light"}>
       <ContentList />

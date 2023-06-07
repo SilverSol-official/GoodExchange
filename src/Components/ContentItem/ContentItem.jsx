@@ -1,23 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import StarIcon from "@mui/icons-material/Star";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addCur, removeCur, startCur } from "../../rdx/features/Fav/favourite";
 
 const ContentItem = ({ props }) => {
-  // const name = "Currency Name";
-  // const fullName = "Full Currency Name";
-  // const symbol = "$";
-  // const code = "USD";
-  // const rate = 1.23;
-  //використано для прикладу
   const { cc, txt, rate, r030 } = props;
   const [isFavorite, setIsFavorite] = useState(false);
+  const dispatch = useDispatch();
+  const favCur = useSelector((state) => state.favourite.favCur);
+
+  useEffect(() => {
+    dispatch(startCur());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (favCur.includes(cc)) {
+      setIsFavorite(true);
+    } else {
+      setIsFavorite(false);
+    }
+  }, [favCur, cc]);
 
   const handleToggleFavorite = () => {
     setIsFavorite(!isFavorite);
-  };
-
-  const handleSeeMore = () => {
-    // Додати логіку, що відбувається при натисканні кнопки "See More"
+    if (!isFavorite) {
+      dispatch(addCur({ cur: cc }));
+    } else {
+      dispatch(removeCur({ cur: cc }));
+    }
   };
 
   return (

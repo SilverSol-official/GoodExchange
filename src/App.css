@@ -78,6 +78,29 @@ header {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  /* width: 0%; */
+}
+
+.search {
+  margin-left: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-right: 20px;
+  width: 70%;
+}
+
+.searchInput {
+  height: 40px;
+  border: none;
+  border-radius: 10px 0px 0px 10px;
+}
+
+.searchButton {
+  height: 40px;
+  border: none;
+  border-radius: 0px 10px 10px 0px;
 }
 
 .logoWrapper>div>p:hover {
@@ -157,84 +180,86 @@ header {
 .Buttons {
   display: flex;
   justify-content: space-between;
-<<<<<<< HEAD
-
-=======
-  
 }
-
 
 /*MainCard*/
 .MainCard {
   display: flex;
   justify-content: space-around;
   margin: auto;
-width: 80%;
-height: 740px;
-left: 280px;
-top: 202px;
+  width: 80%;
+  height: 740px;
+  left: 280px;
+  top: 202px;
 
-background: #FFFFFF;
-box-shadow: 4px 4px 4px 4px rgba(0.5, 0.5, 0.5, 0.5);
+  background: #FFFFFF;
+  box-shadow: 4px 4px 4px 4px rgba(0.5, 0.5, 0.5, 0.5);
 }
-.MainCard__Info{
+
+.MainCard__Info {
   margin: auto;
 }
-.MainCard__SymbolName{
-font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 50px;
-line-height: 77px;
-color: #000000;
+
+.MainCard__SymbolName {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 77px;
+  color: #000000;
 }
-.MainCard__Name{
+
+.MainCard__Name {
   color: #B0AEAE;
   font-size: 45px;
 }
 
-.MainCard__Rate{
+.MainCard__Rate {
   font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 45px;
-line-height: 77px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 45px;
+  line-height: 77px;
 }
-.MainCard__MarketCup{
+
+.MainCard__MarketCup {
   font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 45px;
-line-height: 77px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 45px;
+  line-height: 77px;
 }
-.MainCard__UpdateTime{
+
+.MainCard__UpdateTime {
   font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 45px;
-line-height: 77px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 45px;
+  line-height: 77px;
 }
 
 
 
-.MainCard__Graf__Container{
+.MainCard__Graf__Container {
   margin: auto;
 }
 
 .MainCard__Graf {
   margin: auto;
-  width:830px;
-height: 480px;
-left: 673px;
-top: 31px;
+  width: 830px;
+  height: 480px;
+  left: 673px;
+  top: 31px;
 
-background: #EEEBEB;
+  background: #EEEBEB;
 }
-.MainCard__Buttons{
+
+.MainCard__Buttons {
   display: flex;
   justify-content: space-around;
   padding-top: 5%;
 }
+
 .Grey {
   color: #B0AEAE;
   font-family: 'Inter';
@@ -245,9 +270,8 @@ background: #EEEBEB;
 }
 
 
-.CurrencyChart__Select{
+.CurrencyChart__Select {
   display: flex;
   justify-content: center;
   justify-content: space-around;
->>>>>>> f14395f474adced468c76dce107e352bb51ca93e
 }
