@@ -33,22 +33,19 @@ const ContentList = () => {
     } else if (error != null) {
       return <h2>An error occured: {error}</h2>;
     } else {
-      return (
-        <div className="contentList">
-          <SelectComponent />
-
-          {currencyData.map((item) => {
-            return <ContentItem key={item.id} props={item} />;
-          })}
-        </div>
-      );
+      return currencyData.map((item) => {
+        return <ContentItem key={item.id} props={item} />;
+      });
     }
   };
 
   return (
     <>
-      <TempItem props={headerLabels} />
-      {statusCheck()}
+      <div className="contentList">
+        <SelectComponent />
+        <TempItem props={headerLabels} />
+        {statusCheck()}
+      </div>
     </>
   );
 };
