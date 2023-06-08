@@ -51,6 +51,7 @@ const CurrencyChart = () => {
 
   return (
     <div className='CurrencyChart'>
+      <canvas ref={chartRef} />
       <div className='CurrencyChart__Select'>
         <div>
           Оберіть початкову дату:
@@ -62,7 +63,7 @@ const CurrencyChart = () => {
           <input type='date' value={endDate} onChange={handleEndDateChange} />
         </div>
       </div>
-      <canvas ref={chartRef} />
+      
     </div>
   );
 };

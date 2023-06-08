@@ -77,6 +77,7 @@ const MainContent = () => {
         )}
       </div>
       </div>
+
       <div className="MainContent__Chart">
         <CurrencyChart />
       </div>
