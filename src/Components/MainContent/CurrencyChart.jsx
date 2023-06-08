@@ -1,33 +1,29 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import Chart from "chart.js/auto";
+import { useSelector } from "react-redux";
 
-const CurrencyChart = () => {
+const CurrencyChart = (props) => {
+  const statusDate = useSelector((state) => state.currency.dateCurrencyStatus);
+  const errorDate = useSelector((state) => state.currency.dateCurrencyError);
+  const datesData = useSelector((state) => state.currency.datesData);
+  const ratesData = useSelector((state) => state.currency.ratesData);
+
   const chartRef = useRef();
   let chartInstance = null;
 
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-
   useEffect(() => {
     renderChart();
-  }, [startDate, endDate]);
-
-  const handleStartDateChange = (event) => {
-    setStartDate(event.target.value);
-  };
-
-  const handleEndDateChange = (event) => {
-    setEndDate(event.target.value);
-  };
+    console.log(props.dates);
+  }, [props]);
 
   const renderChart = () => {
     const data = {
-      labels: ["", "Лют", "Бер", "Квіт", "Трав", "Черв"],
+      labels: datesData,
       datasets: [
         {
           label: "Курс валюти",
-          data: [10, 1.3, 1.1, 1.4, 1.2, 1.5],
+          data: ratesData,
           fill: false,
           borderColor: "blue",
         },
@@ -40,8 +36,12 @@ const CurrencyChart = () => {
 
     if (chartInstance) {
       chartInstance.destroy();
+      chartInstance = new Chart(chartRef.current, {
+        type: "line",
+        data: data,
+        options: options,
+      });
     }
-
     chartInstance = new Chart(chartRef.current, {
       type: "line",
       data: data,
@@ -51,21 +51,6 @@ const CurrencyChart = () => {
 
   return (
     <div className="CurrencyChart">
-      <div className="CurrencyChart__Select">
-        <div>
-          Оберіть початкову дату:
-          <input
-            type="date"
-            value={startDate}
-            onChange={handleStartDateChange}
-          />
-        </div>
-        <br />
-        <div>
-          Оберіть кінцеву дату:
-          <input type="date" value={endDate} onChange={handleEndDateChange} />
-        </div>
-      </div>
       <canvas ref={chartRef} />
     </div>
   );

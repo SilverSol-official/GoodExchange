@@ -2,20 +2,20 @@ import React, { useState, useEffect } from "react";
 import CurrencyChart from "./CurrencyChart";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCurrency } from "../../rdx/features/Currencies/currencies";
+import {
+  fetchCurrency,
+  fetchDateCurrency,
+} from "../../rdx/features/Currencies/currencies";
 import { Box } from "@mui/system";
 import { Skeleton } from "@mui/material";
 
 const MainContent = () => {
   const { id } = useParams();
   const curData = useSelector((state) => state.currency.oneCurrencyData);
-  const dispatch = useDispatch();
   const statusOne = useSelector((state) => state.currency.oneCurrencyStatus);
   const errorOne = useSelector((state) => state.currency.oneCurrencyError);
-
-  console.log(curData);
-  console.log("status", statusOne);
-  console.log(curData[0]);
+  const statusDate = useSelector((state) => state.currency.dateCurrencyStatus);
+  const dispatch = useDispatch();
 
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -24,6 +24,9 @@ const MainContent = () => {
     dispatch(fetchCurrency(id));
   }, [dispatch, id]);
 
+  useEffect(() => {
+    console.log(statusDate);
+  }, [statusDate]);
   // Ефект викликається при завантаженні компонента
 
   const handleStartDateChange = (event) => {
@@ -34,12 +37,33 @@ const MainContent = () => {
     setEndDate(event.target.value);
   };
 
+  // Виконати дії після натискання кнопки
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Виконати дії після натискання кнопки
+    let start = "" + startDate.replace("-", "").replace("-", "");
+    let end = "" + endDate.replace("-", "").replace("-", "");
 
-    console.log("Стартова дата:", startDate);
-    console.log("Кінцева дата:", endDate);
+    start = start.split("");
+    end = end.split("");
+    if (start[6] == "0") {
+      start[6] = start[7];
+      start[7] = "";
+    }
+    if (end[6] == "0") {
+      end[6] = end[7];
+      end[7] = "";
+    }
+    start = start.join("");
+    end = end.join("");
+    dispatch(
+      fetchDateCurrency({
+        cur: curData[0].cc,
+        startDate: start,
+        endDate: end,
+      })
+    );
+    console.log("Стартова дата:", start);
+    console.log("Кінцева дата:", end);
   };
 
   const statusCheck = () => {
@@ -61,25 +85,6 @@ const MainContent = () => {
     }
   };
 
-  // const statusCheck = () => {
-  //   if (curData === {} && statusOne === "loading") {
-  //     return <h2>Loading...</h2>;
-  //   } else if (statusOne === "rejected") {
-  //     return <h2>Error!</h2>;
-  //   } else {
-  //     const { cc, exchangedate, r030, rate, txt } = curData[0];
-  //     return (
-  //       <div>
-  //         <p>Цифровий код: {r030}</p>
-  //         <p>Буквений код: {cc}</p>
-  //         <p>Курс: {rate}</p>
-  //         <p>Повна назва: {txt}</p>
-  //         <p>Дата оновлення: {exchangedate}</p>
-  //       </div>
-  //     );
-  //   }
-  // };
-
   return (
     <div className="MainContent">
       <div className="MainContent__Item">
@@ -97,7 +102,7 @@ const MainContent = () => {
         <div className="MainContent__Info">{statusCheck()}</div>
       </div>
       <div className="MainContent__Chart">
-        <CurrencyChart />
+        {statusDate === "resolved" ? <CurrencyChart /> : <></>}
       </div>
     </div>
   );
