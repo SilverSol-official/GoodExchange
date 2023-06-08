@@ -7,7 +7,7 @@ import {
 } from "uuid";
 
 export const fetchAllCurrencies = createAsyncThunk(
-    'currencies',
+    'currencies/fetchAllCurrencies',
     async () => {
         const url = `https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json`;
         try {
@@ -22,20 +22,29 @@ export const fetchAllCurrencies = createAsyncThunk(
     }
 );
 
-// export const fetchAllCurrencies = createAsyncThunk(
-//     'currencies', // Уникальное имя для этого санка
-//     async () => {
-//         const url = 'https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json';
-//         try {
-//             const response = await fetch(url);
-//             const data = await response.json();
-//             return data;
-//         } catch (error) {
-//             // Обработка ошибок, если запрос не удался
-//             throw Error('Failed to fetch data');
-//         }
-//     }
-// );
+export const fetchCurrency = createAsyncThunk(
+    'currencies/fetchCurrency', // Уникальное имя для этого санка
+    async (cur) => {
+        const code = cur.toUpperCase();
+        const date = new Date;
+        const curYear = date.getFullYear();
+        let month = date.getMonth() + 1;
+        if (month <= 9) {
+            month = '0' + month;
+        }
+        const day = date.getDate();
+        const url = `https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?valcode=${code}&date=${''+curYear+month+day}&json`;
+        console.log(url)
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            // Обработка ошибок, если запрос не удался
+            throw Error('Failed to fetch data');
+        }
+    }
+);
 
 const setError = (state, action) => {
     state.currencyStatus = 'rejected';
@@ -46,6 +55,9 @@ const initialState = {
     currencyData: [],
     currencyStatus: 'loading',
     currencyError: null,
+    oneCurrencyData: {},
+    oneCurrencyStatus: 'loading',
+    oneCurrencyError: null,
 }
 
 export const currencySlice = createSlice({
@@ -68,9 +80,20 @@ export const currencySlice = createSlice({
                     id: uuidv4(),
                 });
             });
-            console.log('state w info', state.currencyData);
+            console.log('state all info', state.currencyData);
         },
         [fetchAllCurrencies.rejected]: setError,
+        [fetchCurrency.pending]: (state) => {
+            state.oneCurrencyStatus = 'loading';
+            state.oneCurrencyError = null;
+            console.log('pending');
+        },
+        [fetchCurrency.fulfilled]: (state, action) => {
+            state.oneCurrencyStatus = 'resolved';
+            state.oneCurrencyData = action.payload;
+            console.log('state one info', state.oneCurrencyData);
+        },
+        [fetchCurrency.rejected]: setError,
     }
 })
 
