@@ -2,11 +2,13 @@ import * as React from "react";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
-import { Button } from "@mui/material";
+import { Button } from "react-bootstrap";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import { useDispatch, useSelector } from "react-redux";
 import { changeTheme } from "../../rdx/features/Theme/theme";
+import { Link } from "react-router-dom";
+import { Form } from "react-bootstrap";
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
@@ -42,9 +44,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("sm")]: {
-      width: "12ch",
+      width: "10ch",
       "&:focus": {
-        width: "20ch",
+        width: "15ch",
       },
     },
   },
@@ -53,6 +55,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const Header = () => {
   let darkTheme = useSelector((state) => state.theme.darkTheme);
   const dispatch = useDispatch();
+
+  const [curInput, setCurInput] = React.useState("");
 
   return (
     <header>
@@ -81,15 +85,29 @@ const Header = () => {
             <LightModeIcon sx={{ color: "black" }} />
           </button>
         </div>
-        <Search>
-          <SearchIconWrapper>
-            <SearchIcon />
-          </SearchIconWrapper>
+        {/* <Search>
+          <SearchIconWrapper></SearchIconWrapper>
           <StyledInputBase
             placeholder="Пошук…"
             inputProps={{ "aria-label": "search" }}
+            onChange={(event) => setCurInput(event.target.value)}
+            value={curInput}
           />
-        </Search>
+        </Search> */}
+        <div className="search">
+          <Form.Control
+            type="text"
+            placeholder="Пошук по коду"
+            className="searchInput"
+            onChange={(event) => setCurInput(event.target.value)}
+            value={curInput}
+          />
+          <Link to={`/${curInput}`}>
+            <Button variant="light" className="searchButton">
+              <SearchIcon />
+            </Button>
+          </Link>
+        </div>
       </div>
     </header>
   );
