@@ -52,11 +52,26 @@ export const fetchDateCurrency = createAsyncThunk(
             endDate = props.endDate,
             cur = props.cur;
         const url = `https://bank.gov.ua/NBU_Exchange/exchange_site?start=${startDate}&end=${endDate}&valcode=${cur}&sort=exchangedate&order=desc&json`;
-
-
+        console.log(url);
         try {
-            const response = await fetch(url);
+            const response = await fetch(url, {
+
+                // mode: "cors",
+                // headers: {
+                //     "Access-Control-Allow-Credentials": true,
+                //     'Access-Control-Allow-Methods': '*',
+
+                // },
+                // credentials: "include",
+                // headers: {
+                //     'Origin': 'https://bank.gov.ua'
+                // },
+                // headers: {
+                //     'Access-Control-Allow-Origin': '*'
+                // }
+            });
             const data = await response.json();
+            console.log(data);
 
             return data;
         } catch (error) {
