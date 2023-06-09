@@ -6,16 +6,15 @@ import { useSelector } from "react-redux";
 const CurrencyChart = (props) => {
   const statusDate = useSelector((state) => state.currency.dateCurrencyStatus);
   const errorDate = useSelector((state) => state.currency.dateCurrencyError);
-  const datesData = useSelector((state) => state.currency.datesData);
-  const ratesData = useSelector((state) => state.currency.ratesData);
+  let datesData = useSelector((state) => state.currency.datesData);
+  let ratesData = useSelector((state) => state.currency.ratesData);
 
   const chartRef = useRef();
   let chartInstance = null;
 
   useEffect(() => {
     renderChart();
-    console.log(props.dates);
-  }, [props]);
+  }, []);
 
   const renderChart = () => {
     const data = {
@@ -36,11 +35,6 @@ const CurrencyChart = (props) => {
 
     if (chartInstance) {
       chartInstance.destroy();
-      chartInstance = new Chart(chartRef.current, {
-        type: "line",
-        data: data,
-        options: options,
-      });
     }
     chartInstance = new Chart(chartRef.current, {
       type: "line",

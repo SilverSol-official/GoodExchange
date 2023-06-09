@@ -10,18 +10,43 @@ import { Box } from "@mui/system";
 import { Skeleton } from "@mui/material";
 
 const MainContent = () => {
+  const currentDate = new Date();
+  let year = currentDate.getFullYear();
+  let month = String(currentDate.getMonth() + 1).padStart(2, "0");
+  const day = String(currentDate.getDate()).padStart(2, "0");
+  let monthe, yeare;
+  const defaultStartDate = `${year}-${month}-${day}`;
+  if (month === 1) {
+    monthe = 12;
+    yeare = year - 1;
+  } else {
+    monthe = month - 1;
+    if (monthe < 10) {
+      monthe = "" + "0" + monthe;
+    }
+    yeare = year;
+  }
+  const defaultEndDate = `${yeare}-${monthe}-${day}`;
+
   const { id } = useParams();
   const curData = useSelector((state) => state.currency.oneCurrencyData);
   const statusOne = useSelector((state) => state.currency.oneCurrencyStatus);
   const errorOne = useSelector((state) => state.currency.oneCurrencyError);
   const statusDate = useSelector((state) => state.currency.dateCurrencyStatus);
+  let datesData = useSelector((state) => state.currency.datesData);
   const dispatch = useDispatch();
 
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [startDate, setStartDate] = useState(defaultEndDate);
+  const [endDate, setEndDate] = useState(defaultStartDate);
+  const [key, setKey] = useState(0);
+
+  const changeKey = () => {
+    setKey(key + 1);
+  };
 
   useEffect(() => {
     dispatch(fetchCurrency(id));
+    setKey(1);
   }, [dispatch, id]);
 
   useEffect(() => {
@@ -30,10 +55,12 @@ const MainContent = () => {
   // Ефект викликається при завантаженні компонента
 
   const handleStartDateChange = (event) => {
+    changeKey();
     setStartDate(event.target.value);
   };
 
   const handleEndDateChange = (event) => {
+    changeKey();
     setEndDate(event.target.value);
   };
 
@@ -62,6 +89,7 @@ const MainContent = () => {
         endDate: end,
       })
     );
+    changeKey();
     console.log("Стартова дата:", start);
     console.log("Кінцева дата:", end);
   };
@@ -102,7 +130,11 @@ const MainContent = () => {
         <div className="MainContent__Info">{statusCheck()}</div>
       </div>
       <div className="MainContent__Chart">
-        {statusDate === "resolved" ? <CurrencyChart /> : <></>}
+        {statusDate === "resolved" && datesData != [] ? (
+          <CurrencyChart key={key} />
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

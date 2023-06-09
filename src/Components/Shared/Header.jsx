@@ -63,7 +63,9 @@ const Header = () => {
       <div className="logoWrapper">
         <div className="logo">
           <CurrencyExchangeIcon fontSize="large" />
-          <h2>Currency Info</h2>
+          <Link to="/">
+            <h2>Currency Info</h2>
+          </Link>
         </div>
         <div>
           <p>Валюти</p>

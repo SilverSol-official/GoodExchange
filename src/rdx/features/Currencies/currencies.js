@@ -114,15 +114,20 @@ export const currencySlice = createSlice({
         [fetchCurrency.fulfilled]: (state, action) => {
             state.oneCurrencyStatus = 'resolved';
             state.oneCurrencyData = action.payload;
+            state.datesData = [];
+            state.ratesData = [];
         },
         [fetchCurrency.rejected]: setError,
         [fetchDateCurrency.pending]: (state) => {
             state.dateCurrencyStatus = 'loading';
             state.dateCurrencyError = null;
             console.log('pending');
+
         },
         [fetchDateCurrency.fulfilled]: (state, action) => {
             state.dateCurrencyStatus = 'resolved';
+            state.datesData = [];
+            state.ratesData = [];
             const tempData = action.payload;
             tempData.forEach((item) => {
                 state.datesData.push(item.exchangedate);
