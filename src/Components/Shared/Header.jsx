@@ -67,7 +67,7 @@ const Header = () => {
             <h2>Currency Info</h2>
           </Link>
         </div>
-        <div className="HidenMenu">
+        {/* <div className="HidenMenu">
           <p>Валюти</p>
         </div>
         <div className="HidenMenu">
@@ -75,7 +75,7 @@ const Header = () => {
         </div>
         <div className="HidenMenu">
           <p>Про нас</p>
-        </div>
+        </div>*/}
       </div>
       <div className="searchWrapper">
         <div className="theme">
