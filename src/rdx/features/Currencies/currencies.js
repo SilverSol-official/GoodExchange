@@ -34,10 +34,30 @@ export const fetchCurrency = createAsyncThunk(
         }
         const day = date.getDate();
         const url = `https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?valcode=${code}&date=${''+curYear+month+day}&json`;
-        console.log(url)
         try {
             const response = await fetch(url);
             const data = await response.json();
+            return data;
+        } catch (error) {
+            // Обработка ошибок, если запрос не удался
+            throw Error('Failed to fetch data');
+        }
+    }
+);
+
+export const fetchDateCurrency = createAsyncThunk(
+    'currencies/fetchDateCurrency', // Уникальное имя для этого санка
+    async (props) => {
+        const startDate = props.startDate,
+            endDate = props.endDate,
+            cur = props.cur;
+        const url = `https://bank.gov.ua/NBU_Exchange/exchange_site?start=${startDate}&end=${endDate}&valcode=${cur}&sort=exchangedate&order=desc&json`;
+
+
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+
             return data;
         } catch (error) {
             // Обработка ошибок, если запрос не удался
@@ -58,6 +78,10 @@ const initialState = {
     oneCurrencyData: {},
     oneCurrencyStatus: 'loading',
     oneCurrencyError: null,
+    datesData: [],
+    ratesData: [],
+    dateCurrencyStatus: 'loading',
+    dateCurrencyError: null,
 }
 
 export const currencySlice = createSlice({
@@ -80,7 +104,6 @@ export const currencySlice = createSlice({
                     id: uuidv4(),
                 });
             });
-            console.log('state all info', state.currencyData);
         },
         [fetchAllCurrencies.rejected]: setError,
         [fetchCurrency.pending]: (state) => {
@@ -91,9 +114,24 @@ export const currencySlice = createSlice({
         [fetchCurrency.fulfilled]: (state, action) => {
             state.oneCurrencyStatus = 'resolved';
             state.oneCurrencyData = action.payload;
-            console.log('state one info', state.oneCurrencyData);
         },
         [fetchCurrency.rejected]: setError,
+        [fetchDateCurrency.pending]: (state) => {
+            state.dateCurrencyStatus = 'loading';
+            state.dateCurrencyError = null;
+            console.log('pending');
+        },
+        [fetchDateCurrency.fulfilled]: (state, action) => {
+            state.dateCurrencyStatus = 'resolved';
+            const tempData = action.payload;
+            tempData.forEach((item) => {
+                state.datesData.push(item.exchangedate);
+                state.ratesData.push(item.rate);
+            })
+            console.log(state.datesData);
+
+        },
+        [fetchDateCurrency.rejected]: setError,
     }
 })
 

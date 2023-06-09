@@ -4,13 +4,17 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { useDispatch } from "react-redux";
+import { setSort } from "../../rdx/features/Fav/favourite";
 
-const SelectComponent = () => {
+const SelectComponent = (props) => {
   const [mode, setMode] = React.useState("All");
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
+    dispatch(setSort({ sort: mode }));
     console.log(mode);
-  }, [mode]);
+  }, [mode, dispatch]);
 
   return (
     <Box sx={{ width: "30%" }}>
