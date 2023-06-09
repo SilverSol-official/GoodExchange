@@ -65,13 +65,13 @@ const Header = () => {
           <CurrencyExchangeIcon fontSize="large" />
           <h2>Currency Info</h2>
         </div>
-        <div>
+        <div className="HidenMenu">
           <p>Валюти</p>
         </div>
-        <div>
+        <div className="HidenMenu">
           <p>Криптовалюти</p>
         </div>
-        <div>
+        <div className="HidenMenu">
           <p>Про нас</p>
         </div>
       </div>
@@ -97,7 +97,7 @@ const Header = () => {
         <div className="search">
           <Form.Control
             type="text"
-            placeholder="Пошук по коду"
+            placeholder="Пошук"
             className="searchInput"
             onChange={(event) => setCurInput(event.target.value)}
             value={curInput}
