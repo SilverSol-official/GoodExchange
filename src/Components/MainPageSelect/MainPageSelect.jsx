@@ -17,7 +17,7 @@ const SelectComponent = (props) => {
   }, [mode, dispatch]);
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box className="selectSize">
       <FormControl fullWidth variant="filled">
         <InputLabel id="demo-simple-select-label">Show ...</InputLabel>
         <Select

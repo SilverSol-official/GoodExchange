@@ -294,6 +294,16 @@ header {
   justify-content: space-around;
 }
 
+.CurrencyChart {
+  background-color: #D9D9D9;
+
+}
+
+.CurrencyChart>canvas {
+
+  width: 100%;
+}
+
 /* Main content styles */
 .MainContent {
   display: flex;
@@ -329,8 +339,8 @@ header {
   width: 60%;
 
   margin-top: 5%;
-  ;
-  background-color: #D9D9D9;
+
+
 }
 
 .Choice_Item {
@@ -347,6 +357,10 @@ header {
   /* Відображаємо меню при активуванні */
 }
 
+.MuiBox-root {
+  width: 20%;
+}
+
 /*Адаптив*/
 @media (max-width: 1000px) {
   /*Currency page*/
@@ -355,7 +369,7 @@ header {
   .MainContent {
     display: flex;
     flex-direction: column;
-    height: 1300px;
+
   }
 
   .MainContent__Choice {
@@ -408,7 +422,20 @@ header {
   }
 
   .tempItem {
-    display: none;
+    /* border: solid 2px black; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 30px;
+    margin-top: 10px;
+    padding: 2px;
+    font-size: xx-small;
+  }
+
+  .tempItem>div {
+    width: 25%;
+    text-align: center;
   }
 
   .ContentItem {
@@ -423,5 +450,9 @@ header {
 
   .Buttons {
     margin-right: 5%;
+  }
+
+  .MuiBox-root {
+    width: 100%;
   }
 }
