@@ -20,6 +20,8 @@ const MainContent = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
+  let darkTheme = useSelector((state) => state.theme.darkTheme);
+  
   useEffect(() => {
     dispatch(fetchCurrency(id));
   }, [dispatch, id]);
@@ -86,7 +88,8 @@ const MainContent = () => {
   };
 
   return (
-    <div className="MainContent">
+    <div className={darkTheme ? "dark" : "light"}>
+    <div className="MainContent" >
       <div className="MainContent__Item">
         <div className="MainContent__Choice">
           <h2>Графік</h2>
@@ -113,7 +116,8 @@ const MainContent = () => {
       <div className="MainContent__Chart">
         {statusDate === "resolved" ? <CurrencyChart /> : <></>}
       </div>
-    </div>
+      </div>
+      </div>
   );
 };
 
