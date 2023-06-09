@@ -52,7 +52,7 @@ const MainContent = () => {
       return (
         <div>
           <p>Цифровий код: {r030}</p>
-          <p>Буквений код: {cc}</p>
+          <p>Літерний код: {cc}</p>
           <p>Курс: {rate}</p>
           <p>Повна назва: {txt}</p>
           <p>Дата оновлення: {exchangedate}</p>
@@ -84,17 +84,26 @@ const MainContent = () => {
     <div className="MainContent">
       <div className="MainContent__Item">
         <div className="MainContent__Choice">
-          <form onSubmit={handleSubmit}>
+          <h2>Графік</h2>
+          <hr />
+          <form onSubmit={handleSubmit} className="Choice_Item">
+            <p className="Choice_Item"> Початкова дата </p>
             <input
               type="date"
               value={startDate}
               onChange={handleStartDateChange}
+              className="Choice_Item"
             />
-            <input type="date" value={endDate} onChange={handleEndDateChange} />
+            <p className="Choice_Item"> Кінцева дата </p>
+            <input type="date" value={endDate} onChange={handleEndDateChange} className="Choice_Item" />
+            <br />
             <button type="submit">Відобразити</button>
           </form>
         </div>
-        <div className="MainContent__Info">{statusCheck()}</div>
+        <div className="MainContent__Info">
+          <h2>Валюта</h2>
+          <hr />
+          {statusCheck()}</div>
       </div>
       <div className="MainContent__Chart">
         <CurrencyChart />
