@@ -5,6 +5,7 @@ import {
 
 const initialState = {
     favCur: [],
+    sort: '',
 }
 
 export const favouriteSlice = createSlice({
@@ -30,6 +31,9 @@ export const favouriteSlice = createSlice({
                 localStorage.favCur = JSON.stringify(state.favCur);
             }
 
+        },
+        setSort: (state, action) => {
+            state.sort = action.payload.sort;
         }
     },
 })
@@ -39,6 +43,7 @@ export const {
     addCur,
     removeCur,
     startCur,
+    setSort,
 } = favouriteSlice.actions
 
 export default favouriteSlice.reducer

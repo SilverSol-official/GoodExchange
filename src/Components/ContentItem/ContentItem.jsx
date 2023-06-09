@@ -9,6 +9,7 @@ const ContentItem = ({ props }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const dispatch = useDispatch();
   const favCur = useSelector((state) => state.favourite.favCur);
+  const sortMode = useSelector((state) => state.favourite.sort);
 
   useEffect(() => {
     dispatch(startCur());
@@ -31,27 +32,59 @@ const ContentItem = ({ props }) => {
     }
   };
 
+  const sortFunc = () => {
+    if (sortMode == "Favorite" && isFavorite == true) {
+      return (
+        <div className="ContentItem">
+          <div className="currencySymbol">{r030}</div>
+          <div className="currencyCode">{cc}</div>
+          <div>{txt}</div>
+
+          <div>{rate}</div>
+          <div className="Buttons">
+            <button onClick={handleToggleFavorite}>
+              {isFavorite ? (
+                <StarIcon style={{ fill: "#E5E201" }} />
+              ) : (
+                <StarIcon style={{ fill: "gray" }} />
+              )}
+            </button>
+            <Link to={`/${cc}`} className="seeMoreButton">
+              <button type="button">See More</button>
+            </Link>
+          </div>
+        </div>
+      );
+    } else if (sortMode == "All") {
+      return (
+        <>
+          <div className="ContentItem">
+            <div className="currencySymbol">{r030}</div>
+            <div className="currencyCode">{cc}</div>
+            <div>{txt}</div>
+
+            <div>{rate}</div>
+            <div className="Buttons">
+              <button onClick={handleToggleFavorite}>
+                {isFavorite ? (
+                  <StarIcon style={{ fill: "#E5E201" }} />
+                ) : (
+                  <StarIcon style={{ fill: "gray" }} />
+                )}
+              </button>
+              <Link to={`/${cc}`} className="seeMoreButton">
+                <button type="button">See More</button>
+              </Link>
+            </div>
+          </div>
+        </>
+      );
+    }
+  };
+
   return (
     // <div className="ContentItemConteiner">
-    <div className="ContentItem">
-      <div className="currencySymbol">{r030}</div>
-      <div className="currencyCode">{cc}</div>
-      <div>{txt}</div>
-
-      <div>{rate}</div>
-      <div className="Buttons">
-        <button onClick={handleToggleFavorite}>
-          {isFavorite ? (
-            <StarIcon style={{ fill: "#E5E201" }} />
-          ) : (
-            <StarIcon style={{ fill: "gray" }} />
-          )}
-        </button>
-        <Link to={`/${cc}`} className="seeMoreButton">
-          <button type="button">See More</button>
-        </Link>
-      </div>
-    </div>
+    sortFunc()
     // </div>
   );
 };
