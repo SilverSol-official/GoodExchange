@@ -1,10 +1,12 @@
 import React from "react";
-
+import { useSelector } from "react-redux";
 const TempItem = ({ props }) => {
   const { nameS, nameF, code, course, symbol } = props;
 
+  const darkTheme = useSelector((state) => state.theme.darkTheme);
+
   return (
-    <div className="tempItem">
+    <div className={darkTheme ? "colortemp tempItem" : "tempItem"}>
       <div className="symbol">{symbol}</div>
       <div className="nameS">{nameS}</div>
       <div className="code">{code}</div>

@@ -50,6 +50,10 @@ h2 {
   min-height: 850px;
 }
 
+.colortemp {
+  color: white;
+}
+
 /* header styles */
 header {
   width: 100%;
