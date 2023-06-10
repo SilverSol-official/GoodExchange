@@ -46,7 +46,7 @@ export const fetchCurrency = createAsyncThunk(
 );
 
 export const fetchDateCurrency = createAsyncThunk(
-    'currencies/fetchDateCurrency', // Уникальное имя для этого санка
+    'currencies/fetchDateCurrency',
     async (props) => {
         const startDate = props.startDate,
             endDate = props.endDate,
@@ -54,28 +54,12 @@ export const fetchDateCurrency = createAsyncThunk(
         const url = `https://bank.gov.ua/NBU_Exchange/exchange_site?start=${startDate}&end=${endDate}&valcode=${cur}&sort=exchangedate&order=desc&json`;
         console.log(url);
         try {
-            const response = await fetch(url, {
-
-                // mode: "cors",
-                // headers: {
-                //     "Access-Control-Allow-Credentials": true,
-                //     'Access-Control-Allow-Methods': '*',
-
-                // },
-                // credentials: "include",
-                // headers: {
-                //     'Origin': 'https://bank.gov.ua'
-                // },
-                // headers: {
-                //     'Access-Control-Allow-Origin': '*'
-                // }
-            });
+            const response = await fetch(url);
             const data = await response.json();
             console.log(data);
 
             return data;
         } catch (error) {
-            // Обработка ошибок, если запрос не удался
             throw Error('Failed to fetch data');
         }
     }

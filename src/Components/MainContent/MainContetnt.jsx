@@ -151,15 +151,13 @@ const MainContent = () => {
           {statusDate === "resolved" && datesData != [] ? (
             <CurrencyChart key={key} />
           ) : (
-            <>
-              <h2>
-                Для відображення графіку потрібно встановити та запустити
-                розширення для браузера:{" "}
-                <a href="https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc">
-                  розширення
-                </a>
-              </h2>
-            </>
+            <h2>
+              Для відображення графіку потрібно встановити та запустити
+              розширення для браузера:{" "}
+              <a href="https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc">
+                розширення
+              </a>
+            </h2>
           )}
         </div>
       </div>

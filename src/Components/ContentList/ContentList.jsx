@@ -21,14 +21,12 @@ const ContentList = () => {
   const statusCheck = () => {
     if (status === "loading" && error === null) {
       return (
-        <>
-          <Box sx={{ width: 300 }}>
-            <Skeleton animation="wave" />
-            <Skeleton animation="wave" />
-            <Skeleton animation="wave" />
-            <Skeleton animation="wave" />
-          </Box>
-        </>
+        <Box sx={{ width: 300 }}>
+          <Skeleton animation="wave" />
+          <Skeleton animation="wave" />
+          <Skeleton animation="wave" />
+          <Skeleton animation="wave" />
+        </Box>
       );
     } else if (error != null) {
       return <h2>An error occured: {error}</h2>;
@@ -38,15 +36,12 @@ const ContentList = () => {
       });
     }
   };
-
   return (
-    <>
-      <div className="contentList">
-        <SelectComponent />
-        <TempItem props={headerLabels} />
-        {statusCheck()}
-      </div>
-    </>
+    <div className="contentList">
+      <SelectComponent />
+      <TempItem props={headerLabels} />
+      {statusCheck()}
+    </div>
   );
 };
 

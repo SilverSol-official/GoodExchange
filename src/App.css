@@ -47,7 +47,7 @@ h2 {
 .dark {
   background-color: #2d323b;
   color: rgb(0, 0, 0);
-  height: 100%;
+  min-height: 850px;
 }
 
 /* header styles */

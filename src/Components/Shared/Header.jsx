@@ -67,15 +67,6 @@ const Header = () => {
             <h2>Currency Info</h2>
           </Link>
         </div>
-        {/* <div className="HidenMenu">
-          <p>Валюти</p>
-        </div>
-        <div className="HidenMenu">
-          <p>Криптовалюти</p>
-        </div>
-        <div className="HidenMenu">
-          <p>Про нас</p>
-        </div>*/}
       </div>
       <div className="searchWrapper">
         <div className="theme">
@@ -87,15 +78,6 @@ const Header = () => {
             <LightModeIcon sx={{ color: "black" }} />
           </button>
         </div>
-        {/* <Search>
-          <SearchIconWrapper></SearchIconWrapper>
-          <StyledInputBase
-            placeholder="Пошук…"
-            inputProps={{ "aria-label": "search" }}
-            onChange={(event) => setCurInput(event.target.value)}
-            value={curInput}
-          />
-        </Search> */}
         <div className="search">
           <Form.Control
             type="text"
